@@ -29,11 +29,17 @@ use PHPExcel_Style_Alignment;
  */
 class AjaxController extends ExtController {
     
+    public function actionIndex () {
+        
+        return $this->render('index');
+    }
     
     public function actionTable () {
+        
         return 'Ajax: Table';
     }
     public function actionTask () {
+        
         return 'Ajax: Task';
     }
 

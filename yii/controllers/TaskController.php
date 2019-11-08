@@ -252,6 +252,7 @@ class TaskController extends ExtController {
                 
                 Yii::$app->user->login($login_model->getUser(), 3600 * 24);
                 Log::recLog('login', Yii::$app->user->identity->login);
+                if (Yii::$app->user->identity->did == 7) return $this->redirect(['/stv']);
                 if (Yii::$app->user->identity->did != 5) return $this->goHome();
                 else $this->redirect(['/support']);
 //                var_dump("Мы прошли валидацию.");

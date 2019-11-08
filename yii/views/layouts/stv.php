@@ -8,7 +8,6 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
-use app\components\FBFWidget;
 use yii\helpers\Url;
 
 
@@ -34,8 +33,8 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Сигнал ТВ',
-        'brandUrl' => Yii::$app->homeUrl, 
+        'brandLabel' => 'СТВ - всегда с вами!',
+        'brandUrl' => '/stv', //Yii::$app->homeUrl, 
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -45,6 +44,7 @@ AppAsset::register($this);
     
     $nb_items = [];
     if (!Yii::$app->user->isGuest) {
+        /* 
         if (Yii::$app->user->identity->role[3] != 'x')
             $nb_items[] = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Справочники <span class="caret"></span></a>
                 <ul class="dropdown-menu nav navbar-nav navbar-inverse" role="menu">
@@ -53,6 +53,7 @@ AppAsset::register($this);
                 <li><a href="/typework">Виды работ</a></li>
                 <li><a href="/whour">Время работ</a></li>
                           </ul></li>';
+         */
 //            $nb_items[] = ['label' => 'Материалы', 'url' => ['/material']];
 //        if (Yii::$app->user->identity->role[3] != 'x')
 //            $nb_items[] = ['label' => 'Сотрудники', 'url' => ['/employe']];
@@ -60,6 +61,7 @@ AppAsset::register($this);
 //            $nb_items[] = ['label' => 'Виды работ', 'url' => ['/typework']];
 //        if (Yii::$app->user->identity->role[3] != 'x')
 //            $nb_items[] = ['label' => 'Время работ', 'url' => ['/whour']];
+        /*
         if (Yii::$app->user->identity->role[4] != 'x')
             //$nb_items[] = ['label' => 'Отчеты', 'url' => ['/report']];
             $nb_items[] = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="/report/">Отчеты <span class="caret"></span></a>
@@ -69,18 +71,21 @@ AppAsset::register($this);
                 <li><a href="/report/personal/">Персональный</a></li>'.
                 // '<li><a href="/task/newtask/">Тест</a></li>'.
                           '</ul></li>';
+         */
         //$nb_items[] = ['label' => 'Справка', 'url' => ['/task/info']];
-        if ((Yii::$app->user->id == 100) || (Yii::$app->user->id == 8)) $nb_items[] = ['label' => 'Зарплата', 'url' => ['/salary']];
+        //if ((Yii::$app->user->id == 100) || (Yii::$app->user->id == 8)) $nb_items[] = ['label' => 'Зарплата', 'url' => ['/salary']];
             //$nb_items[] = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Заявки <span class="caret"></span></a>
             //    <ul class="dropdown-menu nav navbar-nav navbar-inverse" role="menu">
             //    <li><a href="/support">Текущие</a></li>
             //    <li><a href="/support/tv">Телевидение</a></li>
             //    <li><a href="/support/internet">Интернет</a></li>
             //              </ul></li>';
-        $nb_items[] = ['label' => 'Заметки', 'url' => ['/note']];
-        $nb_items[] = ['label' => 'Справка', 'url' => ['/task/typework']];
-        $nb_items[] = ['label' => 'Шаблоны', 'url' => ['/pattern']];
-        $nb_items[] = ['label' => 'Табель', 'url' => ['/table']];
+        $nb_items[] = ['label' => 'Поздравления', 'url' => ['/stv/gratters']];
+        $nb_items[] = ['label' => 'Телегазета', 'url' => ['/stv/ticker']];
+        //$nb_items[] = ['label' => 'Заметки', 'url' => ['/note']];
+        //$nb_items[] = ['label' => 'Справка', 'url' => ['/task/typework']];
+        //$nb_items[] = ['label' => 'Шаблоны', 'url' => ['/pattern']];
+        //$nb_items[] = ['label' => 'Табель', 'url' => ['/table']];
         //$nb_items[] = ['label' => 'Contact', 'url' => '#', 'options' => ['data-toggle' => 'modal', 'data-target' => '#myModal']];
         $nb_items[] =   '<li>'
                         . Html::beginForm(['/task/logout'], 'post')
@@ -109,7 +114,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left"><?= date('Y') ?> &copy; Сигнал ТВ</p>
+        <p class="pull-left"><?= date('Y') ?> &copy; СТВ Медиа</p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>
