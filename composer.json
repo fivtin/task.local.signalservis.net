@@ -1,0 +1,8 @@
+{
+    "name": "root/signaltv",
+    "require": {
+        "yiisoft/yii": "dev-master",
+        "yiisoft/yii2": "~2.0.12",
+        "moonlandsoft/yii2-phpexcel": "*"
+    }
+}

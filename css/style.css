@@ -1,0 +1,11 @@
+html, body {
+	min-height: 100%;
+	hight: 100%;	
+}
+
+div {
+	height: 100%;
+	margin:  0px;
+	padding: 0px;
+	position: relative;
+}
