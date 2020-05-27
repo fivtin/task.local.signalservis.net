@@ -353,7 +353,7 @@
 <p>
     Зеленым цветом выделены записи по которым выполнена выплата и передана на оплату. Изменить такую запись уже нельзя.
 </p>
-<div id="getDownloadLink"><button class="btn btn-default" onclick="getExcelFileLink();">Получить ссылку на файл</button></div>
+<div id="getDownloadLink"><button class="btn btn-default" onclick="getExcelFileLink();" oncontextmenu="getExcelFileLinkOnPeriod(event);">Получить ссылку на файл</button></div>
 <div id="loadExcelFile"><a class="btn btn-success">Скачать файл</a></div>
 <pre><?= ''//var_dump($salary) ?></pre>
 <div id="myDiv"></div>
@@ -642,6 +642,7 @@ function calcModalSalary() {
         
         var row_total = 0;
         
+        // не обрабатываем строку помеченную как "удалена"
         if (rows[i].getAttribute('data-change') == 'remove') continue;
         else {
             
@@ -1277,6 +1278,32 @@ function getExcelFileLink() {
     
     runAjax('/ajax/get-salary-load-excel-link?month=' + month + '&year=' + year + '&eids=' + JSON.stringify(eids), showLinkExcel);
     //myDiv.innerHTML = '/ajax/get-salary-load-excel-link?month=' + month + '&year=' + year + '&eids=' + JSON.stringify(eids);
+}
+
+// запуск создания файла отчета с запросом даты начала и окончания и получение ссылки
+function getExcelFileLinkOnPeriod(event) {
+    var start = prompt('Укажите дату начала отчета.');
+    var finish = prompt('Укажите дату окончания запроса.');
+    
+    var month = document.getElementById('month').value;
+    var year = document.getElementById('year').value;
+    //var myDiv = document.getElementById('myDiv');
+    var rows = document.getElementsByClassName('tbl-row');
+    
+    var eids = new Array();
+    
+    for (i = 0; i < rows.length; i++) {
+        
+        eids[i] = rows[i].getAttribute('data-eid');
+    }
+    var link = document.getElementById('getDownloadLink');
+    var load = document.getElementById('loadExcelFile');
+    link.style.display = 'block';
+    load.style.display = 'none';
+    show_hide_load();
+    
+    runAjax('/ajax/get-salary-load-excel-link?month=' + month + '&year=' + year + '&start=' + start + '&finish=' + finish + '&eids=' + JSON.stringify(eids), showLinkExcel);
+    event.preventDefault();
 }
 
 </script>

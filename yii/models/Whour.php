@@ -86,15 +86,15 @@ class Whour extends \yii\db\ActiveRecord
             
             // выполнена, нужны только интервалы в задаче
             //$reletm = Reletm::getHidOnTid($task->tid);
-            $whour = self::find()->select('hid, htext, did, status')->asArray()->where(['IN', 'hid', $reletm])->orderBy('htext')->all();
+            $whour = self::find()->select('hid, htext, did, status')->asArray()->where(['IN', 'hid', $reletm])->orderBy('hour')->all();
         }
         else {
             
             // не выполнена, нужны все интервала отдела или возможно проставленные вручную
             //$reletm = Reletm::getHidOnTid($task->tid);
             if (count($reletm) > 0)
-                $whour = self::find()->select('hid, htext, did, status')->asArray()->where(['<>', 'status', 0])->andWhere(['did' => Yii::$app->user->identity->did])->orWhere(['IN', 'hid', $reletm])->orderBy('htext')->all();
-            else $whour = self::find()->select('hid, htext, did, status')->asArray()->where(['<>', 'status', 0])->andWhere(['did' => Yii::$app->user->identity->did])->orderBy('htext')->all();
+                $whour = self::find()->select('hid, htext, did, status')->asArray()->where(['<>', 'status', 0])->andWhere(['did' => Yii::$app->user->identity->did])->orWhere(['IN', 'hid', $reletm])->orderBy('hour')->all();
+            else $whour = self::find()->select('hid, htext, did, status')->asArray()->where(['<>', 'status', 0])->andWhere(['did' => Yii::$app->user->identity->did])->orderBy('hour')->all();
         }
         $i = 0;
         foreach ($whour as $itemH) {

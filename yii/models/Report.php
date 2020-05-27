@@ -322,7 +322,7 @@ class Report extends Model {
                         }
                         if ($day_eid_shift == 'Н') {
                             $this->report[$No]['whour'] = $this->report[$No]['whour'] + 0; //$task_hour; *
-                            $this->report[$No]['_shour'] = $this->report[$No]['_shour'] - 12 + $task_hour * 2 + 4;
+                            $this->report[$No]['_shour'] = $this->report[$No]['_shour'] - 12 + $task_hour + 4;
                         }
                         if ($day_eid_shift == 'С') {
                             $this->report[$No]['whour'] = $this->report[$No]['whour'] + 0; //$task_hour; *
@@ -781,7 +781,14 @@ class Report extends Model {
                             $task_sumcost = 0;                                       // общая стоимость задачи
                             $task_empcount = count($task['employe']);                // количество сотрудников в задаче
                             foreach ($this->task[$key]['worklist'] as $work) {
-                                $task_sumcost = $task_sumcost + $work['nrepeat'] * $work['cost'];
+                                //echo var_dump($work); die;
+                                if ($work['typework']['status'] == 9) {
+                                    $this->report[$No]['warning'][] = $task['tid'];
+                                    $cft = $cft * $work['cost'];
+                                }
+                                    
+                                else
+                                    $task_sumcost = $task_sumcost + $work['nrepeat'] * $work['cost'];
                             }
                             //$this->report[$No]['whour'] = $this->report[$No]['whour'] + $task_hour;                  // время по задачам
                             $this->report[$No]['cost'] = $this->report[$No]['cost'] + $task_sumcost/$task_empcount;  // стоимость по задачам
@@ -967,7 +974,7 @@ class Report extends Model {
                         }
                         if ($day_eid_shift == 'Н') {
                             $this->report[$No]['whour'] = $this->report[$No]['whour'] + 0; //$task_hour; *
-                            $this->report[$No]['_shour'] = $this->report[$No]['_shour'] - 12 + $task_hour * 2 + 4;
+                            $this->report[$No]['_shour'] = $this->report[$No]['_shour'] - 12 + $task_hour + 4;
                         }
                         if ($day_eid_shift == 'С') {
                             $this->report[$No]['whour'] = $this->report[$No]['whour'] + 0; //$task_hour; *
@@ -1016,6 +1023,9 @@ class Report extends Model {
                         }
                         if ($day_eid_shift == 'С') {
                             $this->report[$No]['whour'] = $this->report[$No]['whour'] + 8;
+                            // нет задач где они должны быть (для сотрудников для которых учет ведется по задачам и день выставлен в табеле как рабочий)
+                            if ($this->report[$No]['tab_task'] == 1) 
+                                $this->report[$No]['_shour'] = $this->report[$No]['_shour'] - 12;
                         }
                         if ($day_eid_shift == 'К') {
                             $this->report[$No]['_shour'] = $this->report[$No]['_shour'] + 8;
@@ -1055,6 +1065,9 @@ class Report extends Model {
                         }
                         if ($day_eid_shift == 'С') {
                             $this->report[$No]['whour'] = $this->report[$No]['whour'] + 0;
+                            // нет задач где они должны быть (для сотрудников для которых учет ведется по задачам и день выставлен в табеле как рабочий)
+                            if ($this->report[$No]['tab_task'] == 1) 
+                                $this->report[$No]['_shour'] = $this->report[$No]['_shour'] - 12;
                         }
                         if ($day_eid_shift == 'К') {
                             $this->report[$No]['_shour'] = $this->report[$No]['_shour'] + 8;

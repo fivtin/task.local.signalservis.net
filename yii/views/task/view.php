@@ -204,6 +204,7 @@ else {
                             <p><a class="category" href="#" data-id="6" select= "0" onclick="show_category(this);">Частный сектор</a></p>
                             <p><a class="category" href="#" data-id="7" select= "0" onclick="show_category(this);">Ремонт</a></p>
                             <p><a class="category" href="#" data-id="9" select= "0" onclick="show_category(this);">Оптика</a></p>
+                            <p><a class="category" href="#" data-id="10" select= "0" onclick="show_category(this);">Техподдержка</a></p>
                             <p><a class="category" href="#" data-id="1" select= "0" onclick="show_category(this);">Другое</a></p>
                             <?php } ?>
                         </div>

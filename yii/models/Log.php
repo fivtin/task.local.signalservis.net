@@ -55,6 +55,15 @@ class Log extends \yii\db\ActiveRecord
     }
 
     public function recLog ($mclass, $message) {
+    
+        if (($mclass == 'alarm') || ($mclass == 'open')) {
+            $rec = new Log();
+            $rec->ip = Yii::$app->request->userIP;
+            $rec->uid = 0;
+            $rec->mclass = $mclass;
+            $rec->message = $message;
+            $rec->save();
+        }
 
         if (Yii::$app->user->id != 1) {
             $rec = new Log();
